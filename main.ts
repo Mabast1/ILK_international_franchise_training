@@ -1,13 +1,3 @@
-input.onButtonPressed(Button.A, function () {
-    loneliness = 0
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .
-        `)
-})
 input.onGesture(Gesture.FreeFall, function () {
     basic.showLeds(`
         # # # # #
@@ -62,8 +52,13 @@ basic.showLeds(`
     . . . . .
     `)
 basic.forever(function () {
-    basic.pause(1000)
-    loneliness += 1
+    if (input.buttonIsPressed(Button.A)) {
+        loneliness += 1
+    } else {
+        if (input.buttonIsPressed(Button.B)) {
+            loneliness += -1
+        }
+    }
     if (loneliness < 15) {
         basic.showLeds(`
             . . . . .
@@ -73,7 +68,7 @@ basic.forever(function () {
             . # # # .
             `)
     } else {
-        if (loneliness < 40) {
+        if (loneliness < 20) {
             basic.showLeds(`
                 . # . # .
                 . . . . .
